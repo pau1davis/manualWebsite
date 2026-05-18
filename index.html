@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fleet System Defense Manual // GNS-7</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Scanline overlay -->
+  <div class="scanlines"></div>
+  <!-- Matrix canvas background -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- Sidebar Navigation -->
+  <nav id="sidebar">
+    <div class="nav-header">
+      <div class="nav-logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">GNS-7</span>
+        <span class="logo-bracket">]</span>
+      </div>
+      <div class="nav-subtitle">COLONIAL FLEET SECURE TERMINAL</div>
+      <div class="status-line">
+        <span class="status-dot"></span>
+        <span id="status-text">SYSTEM ONLINE</span>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#cover" class="nav-link active" data-section="cover">
+        <span class="nav-icon">&#x25BA;</span> 00 // COVER
+      </a></li>
+      <li><a href="#toc" class="nav-link" data-section="toc">
+        <span class="nav-icon">&#x25BA;</span> 01 // TABLE OF CONTENTS
+      </a></li>
+      <li><a href="#mission" class="nav-link" data-section="mission">
+        <span class="nav-icon">&#x25BA;</span> 02 // MISSION STATEMENT
+      </a></li>
+      <li><a href="#conduct" class="nav-link" data-section="conduct">
+        <span class="nav-icon">&#x25BA;</span> 03 // CODE OF CONDUCT
+      </a></li>
+      <li><a href="#intro" class="nav-link" data-section="intro">
+        <span class="nav-icon">&#x25BA;</span> 04 // INTRODUCTION
+      </a></li>
+      <li><a href="#threats" class="nav-link" data-section="threats">
+        <span class="nav-icon">&#x25BA;</span> 05 // THREAT IDENTIFICATION
+      </a></li>
+      <li><a href="#procedure" class="nav-link" data-section="procedure">
+        <span class="nav-icon">&#x25BA;</span> 06 // CORE PROCEDURE
+      </a></li>
+      <li><a href="#report" class="nav-link" data-section="report">
+        <span class="nav-icon">&#x25BA;</span> 07 // INCIDENT REPORT
+      </a></li>
+      <li><a href="#prevention" class="nav-link" data-section="prevention">
+        <span class="nav-icon">&#x25BA;</span> 08 // BEST PRACTICES
+      </a></li>
+      <li><a href="#afterword" class="nav-link" data-section="afterword">
+        <span class="nav-icon">&#x25BA;</span> 09 // AFTERWORD
+      </a></li>
+    </ul>
+
+    <div class="nav-footer">
+      <div class="nav-footer-line">CLEARANCE: AUTHORIZED</div>
+      <div class="nav-footer-line">CLASSIFICATION: RESTRICTED</div>
+      <div id="clock" class="nav-footer-line"></div>
+    </div>
+  </nav>
+
+  <!-- Hamburger for mobile -->
+  <button id="menuToggle" aria-label="Open navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Main Content -->
+  <main id="content">
+
+    <!-- ── COVER PAGE ── -->
+    <section id="cover" class="page active">
+      <div class="page-inner cover-page">
+        <div class="cover-top-bar">
+          <span>DOCUMENT REF: GNS-FSD-001</span>
+          <span>CLASSIFICATION: RESTRICTED</span>
+          <span>REV: 1.0</span>
+        </div>
+        <div class="cover-emblem">
+          <div class="emblem-ring outer-ring"></div>
+          <div class="emblem-ring mid-ring"></div>
+          <div class="emblem-ring inner-ring"></div>
+          <div class="emblem-core">
+            <span>GNS</span>
+          </div>
+        </div>
+        <h1 class="cover-title glitch" data-text="FLEET SYSTEM DEFENSE MANUAL">FLEET SYSTEM<br/>DEFENSE MANUAL</h1>
+        <div class="cover-divider"></div>
+        <p class="cover-team">GALACTICA NETWORK SECURITY TEAM</p>
+        <p class="cover-subtitle">Protocols for System Protection and Threat Response</p>
+        <div class="cover-meta">
+          <div class="meta-row"><span class="meta-label">AUTHOR</span><span class="meta-value">Paul Davis</span></div>
+          <div class="meta-row"><span class="meta-label">ORGANIZATION</span><span class="meta-value">Galactica Network Security Team</span></div>
+          <div class="meta-row"><span class="meta-label">STATUS</span><span class="meta-value text-green">ACTIVE DEPLOYMENT</span></div>
+        </div>
+        <div class="cover-warning">
+          <span class="warn-bracket">&#x26A0;</span>
+          UNAUTHORIZED ACCESS TO COLONIAL FLEET SYSTEMS IS A VIOLATION OF FLEET SECURITY DIRECTIVE 7-ALPHA
+          <span class="warn-bracket">&#x26A0;</span>
+        </div>
+        <div class="scroll-hint">SCROLL OR USE NAVIGATION &#x25BC;</div>
+      </div>
+    </section>
+
+    <!-- ── TABLE OF CONTENTS ── -->
+    <section id="toc" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">01</span>
+          <h2 class="page-title">TABLE OF CONTENTS</h2>
+          <div class="page-header-line"></div>
+        </div>
+        <div class="toc-grid">
+          <a href="#mission" class="toc-entry">
+            <span class="toc-num">02</span>
+            <div class="toc-info">
+              <span class="toc-name">Mission Statement</span>
+              <span class="toc-desc">Team purpose, audience, and scope</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+          <a href="#conduct" class="toc-entry">
+            <span class="toc-num">03</span>
+            <div class="toc-info">
+              <span class="toc-name">Code of Conduct</span>
+              <span class="toc-desc">Personnel responsibilities and operating principles</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+          <a href="#intro" class="toc-entry">
+            <span class="toc-num">04</span>
+            <div class="toc-info">
+              <span class="toc-name">Introduction &amp; Key Concepts</span>
+              <span class="toc-desc">Definitions of core security terminology</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+          <a href="#threats" class="toc-entry">
+            <span class="toc-num">05</span>
+            <div class="toc-info">
+              <span class="toc-name">Threat Identification</span>
+              <span class="toc-desc">Recognizing active and passive network threats</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+          <a href="#procedure" class="toc-entry">
+            <span class="toc-num">06</span>
+            <div class="toc-info">
+              <span class="toc-name">Core Procedure</span>
+              <span class="toc-desc">Responding to a suspected network compromise</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+          <a href="#report" class="toc-entry">
+            <span class="toc-num">07</span>
+            <div class="toc-info">
+              <span class="toc-name">Incident Report &amp; Analysis</span>
+              <span class="toc-desc">Response strategy evaluation</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+          <a href="#prevention" class="toc-entry">
+            <span class="toc-num">08</span>
+            <div class="toc-info">
+              <span class="toc-name">Best Practices &amp; Prevention</span>
+              <span class="toc-desc">Proactive security measures for all personnel</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+          <a href="#afterword" class="toc-entry">
+            <span class="toc-num">09</span>
+            <div class="toc-info">
+              <span class="toc-name">Afterword</span>
+              <span class="toc-desc">Closing notes from the Security Team</span>
+            </div>
+            <span class="toc-arrow">&#x2192;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── MISSION STATEMENT ── -->
+    <section id="mission" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">02</span>
+          <h2 class="page-title">MISSION STATEMENT</h2>
+          <div class="page-header-line"></div>
+        </div>
+
+        <div class="terminal-block">
+          <div class="terminal-titlebar">
+            <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+            <span class="t-label">MISSION_DIRECTIVE.log</span>
+          </div>
+          <div class="terminal-body">
+            <p class="terminal-line"><span class="prompt">$</span> cat MISSION_DIRECTIVE.log</p>
+            <p class="terminal-output">The Galactica Network Security Team is dedicated to protecting the integrity of Colonial Fleet computer systems through network security practices, technical procedures, and strong system design. Our manual provides guidance for personnel responsible for maintaining, operating, or interacting with digital infrastructure aboard fleet vessels.</p>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="card-icon">&#x1F3AF;</div>
+            <h3 class="card-title">PRIMARY AUDIENCE</h3>
+            <p>Fleet technicians, communications officers, and junior system administrators who manage shipboard networks.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon">&#x1F4CB;</div>
+            <h3 class="card-title">SECONDARY AUDIENCE</h3>
+            <p>Command personnel and general crew members who must follow security protocols when interacting with digital systems.</p>
+          </div>
+          <div class="info-card">
+            <div class="card-icon">&#x1F512;</div>
+            <h3 class="card-title">SCOPE</h3>
+            <p>Prevention and detection of network vulnerabilities — improper configuration, insecure channels, compromised credentials, and unauthorized access.</p>
+          </div>
+        </div>
+
+        <div class="blockquote-box">
+          <div class="bq-bar"></div>
+          <p>Through clear documentation and standardized practices, the Galactica Network Security Team aims to ensure that all personnel interacting with digital systems understand their role in maintaining network security. By prioritizing consistent and reliable responses to network crisis, this manual supports the fleet's broader mission of survival and strategic coordination.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CODE OF CONDUCT ── -->
+    <section id="conduct" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">03</span>
+          <h2 class="page-title">CODE OF CONDUCT</h2>
+          <div class="page-header-line"></div>
+        </div>
+        <p class="section-intro">Members of the Galactica Network Security Team are responsible for the protection of fleet systems. All personnel interacting with digital systems are expected to uphold the following principles:</p>
+
+        <div class="conduct-list">
+
+          <div class="conduct-item">
+            <div class="conduct-num">01</div>
+            <div class="conduct-body">
+              <h3>OPERATION INTEGRITY</h3>
+              <p>Personnel must prioritize the stability and functionality of fleet systems before convenience. All actions taken on a system should be aligned with established procedures.</p>
+            </div>
+          </div>
+
+          <div class="conduct-item">
+            <div class="conduct-num">02</div>
+            <div class="conduct-body">
+              <h3>SECURITY ACCOUNTABILITY</h3>
+              <p>Every user is responsible for maintaining the security of our systems. Credentials must not be shared, and any irregularities must be reported and handled immediately.</p>
+            </div>
+          </div>
+
+          <div class="conduct-item">
+            <div class="conduct-num">03</div>
+            <div class="conduct-body">
+              <h3>CONTROLLED ACCESS</h3>
+              <p>Access to systems must be limited to authorized personnel only. Users must follow all access protocols to prevent exposure or misuse of sensitive information.</p>
+            </div>
+          </div>
+
+          <div class="conduct-item">
+            <div class="conduct-num">04</div>
+            <div class="conduct-body">
+              <h3>CONTAINMENT OVER RISK</h3>
+              <p>In the event of a suspected breach, personnel must prioritize isolation and containment over continued operation. Preserving system integrity is critical to fleet survival.</p>
+            </div>
+          </div>
+
+          <div class="conduct-item">
+            <div class="conduct-num">05</div>
+            <div class="conduct-body">
+              <h3>THREAT AWARENESS</h3>
+              <p>Personnel must always remain alert to potential vulnerabilities. Systems should be routinely monitored, updated, and evaluated to identify risks before they become threats.</p>
+            </div>
+          </div>
+
+          <div class="conduct-item">
+            <div class="conduct-num">06</div>
+            <div class="conduct-body">
+              <h3>COLLECTIVE RESPONSIBILITY</h3>
+              <p>Network security is not limited to technical staff. Command personnel, communications officers, and crew members all play a role in maintaining secure operations.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="warning-box">
+          <span class="warn-icon">&#x26A0;</span>
+          <p>Failure to follow these principles risks system failure and the survival of the fleet as a whole.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── INTRODUCTION ── -->
+    <section id="intro" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">04</span>
+          <h2 class="page-title">INTRODUCTION // KEY CONCEPTS</h2>
+          <div class="page-header-line"></div>
+        </div>
+        <p class="section-intro">The following definitions establish a shared operational vocabulary for all personnel interacting with fleet systems. Familiarity with these terms is required before engaging with any security protocol.</p>
+
+        <div class="glossary">
+
+          <div class="gloss-entry">
+            <div class="gloss-term">
+              <span class="gloss-tag">NET-SEG</span>
+              Network Segmentation
+            </div>
+            <p class="gloss-def">Dividing a network into sections so that intrusions in one area cannot spread to other systems. Critical for containing potential Cylon intrusion vectors.</p>
+          </div>
+
+          <div class="gloss-entry">
+            <div class="gloss-term">
+              <span class="gloss-tag">SEC-ACC</span>
+              Secure Access
+            </div>
+            <p class="gloss-def">The process of verifying identity before allowing someone to use a system, typically through passwords, access codes, or clearance levels.</p>
+          </div>
+
+          <div class="gloss-entry">
+            <div class="gloss-term">
+              <span class="gloss-tag">COMP-SYS</span>
+              Compromised System
+            </div>
+            <p class="gloss-def">Any device that has been accessed, altered, or controlled by an unauthorized user. Immediate isolation is required upon detection.</p>
+          </div>
+
+          <div class="gloss-entry">
+            <div class="gloss-term">
+              <span class="gloss-tag">INC-RES</span>
+              Incident Response
+            </div>
+            <p class="gloss-def">The actions taken after a security issue is detected, including isolating vulnerable systems, reporting the issue, and restoring normal operations.</p>
+          </div>
+
+          <div class="gloss-entry">
+            <div class="gloss-term">
+              <span class="gloss-tag">FSI</span>
+              Fail-Safe Isolation
+            </div>
+            <p class="gloss-def">A system feature that automatically shuts down critical components when a threat is detected to prevent further damage.</p>
+          </div>
+
+          <div class="gloss-entry">
+            <div class="gloss-term">
+              <span class="gloss-tag">COM-DIS</span>
+              Communication Discipline
+            </div>
+            <p class="gloss-def">The practice of following strict rules when sending or receiving information to prevent interception or exploitation of fleet communications.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── THREAT IDENTIFICATION ── -->
+    <section id="threats" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">05</span>
+          <h2 class="page-title">THREAT IDENTIFICATION</h2>
+          <div class="page-header-line"></div>
+        </div>
+        <p class="section-intro">All personnel must be capable of recognizing the signs of a network compromise. The following categories represent the primary threat vectors identified by the Galactica Network Security Team.</p>
+
+        <div class="threat-grid">
+
+          <div class="threat-card level-critical">
+            <div class="threat-header">
+              <span class="threat-level-badge">CRITICAL</span>
+              <h3>Unauthorized System Access</h3>
+            </div>
+            <p>Attempts by unverified personnel or external agents to access restricted systems. Indicators include failed login sequences, unexpected access at unusual hours, and unfamiliar device signatures on the network.</p>
+            <div class="threat-indicators">
+              <span class="indicator">Failed logins</span>
+              <span class="indicator">Unknown devices</span>
+              <span class="indicator">Off-hours access</span>
+            </div>
+          </div>
+
+          <div class="threat-card level-high">
+            <div class="threat-header">
+              <span class="threat-level-badge">HIGH</span>
+              <h3>Compromised Credentials</h3>
+            </div>
+            <p>Personnel credentials that have been stolen, shared, or otherwise exposed. These allow an attacker to move through the system as an authorized user, making detection significantly more difficult.</p>
+            <div class="threat-indicators">
+              <span class="indicator">Shared passwords</span>
+              <span class="indicator">Unusual user behavior</span>
+              <span class="indicator">Duplicate sessions</span>
+            </div>
+          </div>
+
+          <div class="threat-card level-high">
+            <div class="threat-header">
+              <span class="threat-level-badge">HIGH</span>
+              <h3>Insecure Communication Channels</h3>
+            </div>
+            <p>Unencrypted or improperly secured communication links that expose data in transit. Fleet communications that bypass standard encryption protocols are considered active vulnerabilities.</p>
+            <div class="threat-indicators">
+              <span class="indicator">Unencrypted traffic</span>
+              <span class="indicator">Rogue relay signals</span>
+              <span class="indicator">Protocol bypasses</span>
+            </div>
+          </div>
+
+          <div class="threat-card level-moderate">
+            <div class="threat-header">
+              <span class="threat-level-badge">MODERATE</span>
+              <h3>Improper System Configuration</h3>
+            </div>
+            <p>Systems configured with excessive permissions, unnecessary open ports, or outdated software create exploitable entry points. These vulnerabilities are often present before any active attack begins.</p>
+            <div class="threat-indicators">
+              <span class="indicator">Open ports</span>
+              <span class="indicator">Excess permissions</span>
+              <span class="indicator">Outdated software</span>
+            </div>
+          </div>
+
+          <div class="threat-card level-moderate">
+            <div class="threat-header">
+              <span class="threat-level-badge">MODERATE</span>
+              <h3>Lateral Network Spread</h3>
+            </div>
+            <p>An attacker who gains access to one system may attempt to move laterally across an unsegmented network. Without proper isolation, a single compromised node can lead to fleet-wide system failure.</p>
+            <div class="threat-indicators">
+              <span class="indicator">Cross-segment traffic</span>
+              <span class="indicator">Unusual data transfers</span>
+              <span class="indicator">Cascading failures</span>
+            </div>
+          </div>
+
+          <div class="threat-card level-low">
+            <div class="threat-header">
+              <span class="threat-level-badge">MONITOR</span>
+              <h3>Social Engineering</h3>
+            </div>
+            <p>Manipulation of personnel to disclose credentials or bypass security procedures. Crew members may be deceived through false authority, urgency, or impersonation of trusted personnel.</p>
+            <div class="threat-indicators">
+              <span class="indicator">Unusual requests</span>
+              <span class="indicator">Identity unverified</span>
+              <span class="indicator">Pressure to bypass protocol</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CORE PROCEDURE ── -->
+    <section id="procedure" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">06</span>
+          <h2 class="page-title">CORE PROCEDURE</h2>
+          <div class="page-header-line"></div>
+        </div>
+        <h3 class="subsection-title">RESPONDING TO A SUSPECTED NETWORK COMPROMISE</h3>
+
+        <div class="proc-meta-grid">
+          <div class="proc-meta-item">
+            <span class="proc-meta-label">PURPOSE</span>
+            <p>Outlines the required steps for identifying, containing, and reporting a suspected network compromise. Prompt action is critical to preventing the spread of system-wide threats.</p>
+          </div>
+          <div class="proc-meta-item">
+            <span class="proc-meta-label">AUDIENCE</span>
+            <p>Communications officers, technical personnel, and any crew member authorized to access fleet systems.</p>
+          </div>
+          <div class="proc-meta-item">
+            <span class="proc-meta-label">WHEN TO USE</span>
+            <p>Use the steps below if you observe unusual system behavior, unexpected system commands, or loss of control over a device.</p>
+          </div>
+        </div>
+
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-number">STEP 01</div>
+            <div class="step-content">
+              <h3>Confirm Suspicious Activity</h3>
+              <p>Verify that the issue is not caused by standard system operations or user error. Do not attempt to troubleshoot beyond basic confirmation.</p>
+            </div>
+            <div class="step-connector"></div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">STEP 02</div>
+            <div class="step-content">
+              <h3>Isolate the System</h3>
+              <p>Immediately disconnect the affected device from the network. Disable wireless or wired connections. <strong class="text-red">Do not power off the system unless instructed.</strong></p>
+            </div>
+            <div class="step-connector"></div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">STEP 03</div>
+            <div class="step-content">
+              <h3>Cease All Unnecessary Actions</h3>
+              <p>Stop all activity on the affected system to avoid further compromise or data corruption.</p>
+            </div>
+            <div class="step-connector"></div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">STEP 04</div>
+            <div class="step-content">
+              <h3>Report the Incident</h3>
+              <p>Notify your chain of command and the Network Security Team immediately. Provide: <strong>location</strong> of the system, a <strong>description</strong> of the issue, and the <strong>time</strong> the issue was first observed.</p>
+            </div>
+            <div class="step-connector"></div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">STEP 05</div>
+            <div class="step-content">
+              <h3>Secure Access Credentials</h3>
+              <p>Do not reuse or share any credentials associated with the affected system. Be prepared to reset access credentials if instructed by the Security Team.</p>
+            </div>
+            <div class="step-connector"></div>
+          </div>
+
+          <div class="step last-step">
+            <div class="step-number">STEP 06</div>
+            <div class="step-content">
+              <h3>Await Further Instructions</h3>
+              <p>Do not reconnect the system until cleared by authorized personnel.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="end-state-box">
+          <div class="es-label">END STATE</div>
+          <p>The affected system is successfully isolated, reported, and secured, preventing further spread of the attack and allowing the Network Security Team to begin formal incident response procedures.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── INCIDENT REPORT ── -->
+    <section id="report" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">07</span>
+          <h2 class="page-title">INCIDENT REPORT &amp; ANALYSIS</h2>
+          <div class="page-header-line"></div>
+        </div>
+
+        <div class="terminal-block">
+          <div class="terminal-titlebar">
+            <span class="t-dot red"></span><span class="t-dot yellow"></span><span class="t-dot green"></span>
+            <span class="t-label">INCIDENT_REPORT_ANALYSIS.log</span>
+          </div>
+          <div class="terminal-body">
+            <p class="terminal-line"><span class="prompt">$</span> cat INCIDENT_REPORT_ANALYSIS.log</p>
+            <p class="terminal-output">SUBJECT: Suspected Network Compromise — Response Strategy Evaluation</p>
+            <p class="terminal-output">DATE: [REDACTED] | CLASSIFICATION: RESTRICTED</p>
+          </div>
+        </div>
+
+        <div class="report-section">
+          <h3 class="report-heading">Introduction</h3>
+          <p>This report addresses how the fleet should respond to a suspected network compromise. As fleet operations increasingly rely on computer networks, the risk of a system-wide breach presents a threat to both operational stability and survival. In an environment where Cylons have gained advanced technological capabilities, even a small vulnerability could lead to catastrophic consequences. The purpose of this report is to evaluate possible response strategies in the event of a suspected compromise and to recommend a plan that balances security with operational functionality. Considering the slim margin of error, it is essential that the fleet adopt a structured and disciplined approach to network threats.</p>
+        </div>
+
+        <div class="report-section">
+          <h3 class="report-heading">Strategy Evaluation</h3>
+          <p>The fleet has three primary strategies available when responding to network attacks. Each presents distinct trade-offs between security, capability, and operational risk.</p>
+          <div class="strategy-compare">
+            <div class="strategy-item">
+              <div class="strategy-header strat-red">
+                <span class="strat-icon">&#x26D4;</span>
+                <h4>Full System Shutdown</h4>
+              </div>
+              <p>Maximum security, but severely limits the fleet's ability to function. Navigation, communications, and life support systems may be compromised.</p>
+              <div class="strat-verdict verdict-no">NOT RECOMMENDED</div>
+            </div>
+            <div class="strategy-item">
+              <div class="strategy-header strat-yellow">
+                <span class="strat-icon">&#x26A0;</span>
+                <h4>Continued Operation with Monitoring</h4>
+              </div>
+              <p>Maintains full capability but introduces significant risk if the threat spreads unchecked through an active system.</p>
+              <div class="strat-verdict verdict-caution">USE WITH CAUTION</div>
+            </div>
+            <div class="strategy-item">
+              <div class="strategy-header strat-green">
+                <span class="strat-icon">&#x2713;</span>
+                <h4>Isolation of Affected Systems</h4>
+              </div>
+              <p>Disconnects affected systems while maintaining unaffected systems. Provides the most balanced approach between security and operational functionality.</p>
+              <div class="strat-verdict verdict-yes">RECOMMENDED</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="report-section">
+          <h3 class="report-heading">Summary &amp; Recommendation</h3>
+          <p>This report recommends adopting an <strong>isolation strategy</strong> as the standard response protocol. This approach aligns with established security procedures while preserving critical operational functions. Isolation allows the Network Security Team to investigate, contain, and resolve threats without rendering the fleet inoperable during a crisis. This approach must be paired with clear reporting chains and pre-established escalation criteria to ensure rapid response.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BEST PRACTICES ── -->
+    <section id="prevention" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">08</span>
+          <h2 class="page-title">BEST PRACTICES &amp; PREVENTION</h2>
+          <div class="page-header-line"></div>
+        </div>
+        <p class="section-intro">Prevention is the most effective form of network security. The following practices must be observed by all personnel at all times to minimize the risk of compromise.</p>
+
+        <div class="best-practices-grid">
+
+          <div class="bp-card">
+            <div class="bp-icon">&#x1F511;</div>
+            <h3>Credential Management</h3>
+            <ul>
+              <li>Never share login credentials under any circumstance</li>
+              <li>Change passwords at regular intervals as directed by the Security Team</li>
+              <li>Use unique credentials for each system you access</li>
+              <li>Report lost or suspected compromised credentials immediately</li>
+            </ul>
+          </div>
+
+          <div class="bp-card">
+            <div class="bp-icon">&#x1F5A7;</div>
+            <h3>Network Hygiene</h3>
+            <ul>
+              <li>Never connect unauthorized devices to fleet networks</li>
+              <li>Ensure all systems are running approved and updated software</li>
+              <li>Disable unused ports and services on all managed systems</li>
+              <li>Confirm network segmentation is active before any maintenance</li>
+            </ul>
+          </div>
+
+          <div class="bp-card">
+            <div class="bp-icon">&#x1F4E1;</div>
+            <h3>Communication Security</h3>
+            <ul>
+              <li>Only use approved, encrypted communication channels</li>
+              <li>Verify the identity of any person requesting system access</li>
+              <li>Do not transmit sensitive data over unverified channels</li>
+              <li>Report any requests that seem to bypass standard protocol</li>
+            </ul>
+          </div>
+
+          <div class="bp-card">
+            <div class="bp-icon">&#x1F4CB;</div>
+            <h3>Routine Monitoring</h3>
+            <ul>
+              <li>Review system logs at the start and end of every shift</li>
+              <li>Document and report any anomalies immediately</li>
+              <li>Participate in scheduled security drills and protocol reviews</li>
+              <li>Escalate unresolved anomalies to the Security Team</li>
+            </ul>
+          </div>
+
+          <div class="bp-card">
+            <div class="bp-icon">&#x1F6E1;</div>
+            <h3>Physical Security</h3>
+            <ul>
+              <li>Never leave a workstation logged in and unattended</li>
+              <li>Ensure access to server rooms and terminals requires clearance</li>
+              <li>Report unauthorized personnel in restricted areas</li>
+              <li>Lock terminals when stepping away, even briefly</li>
+            </ul>
+          </div>
+
+          <div class="bp-card">
+            <div class="bp-icon">&#x1F9E0;</div>
+            <h3>Situational Awareness</h3>
+            <ul>
+              <li>Stay informed of current threat advisories from the Security Team</li>
+              <li>Trust instincts — report anything that seems unusual or out of place</li>
+              <li>Do not assume a threat is handled until formally cleared</li>
+              <li>Maintain awareness of who has access to systems around you</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── AFTERWORD ── -->
+    <section id="afterword" class="page">
+      <div class="page-inner">
+        <div class="page-header">
+          <span class="page-num">09</span>
+          <h2 class="page-title">AFTERWORD</h2>
+          <div class="page-header-line"></div>
+        </div>
+
+        <div class="afterword-body">
+          <div class="afterword-emblem">
+            <div class="emblem-ring outer-ring small"></div>
+            <div class="emblem-ring mid-ring small"></div>
+            <div class="emblem-core small"><span>GNS</span></div>
+          </div>
+
+          <div class="afterword-text">
+            <p>The contents of this manual represent the collective knowledge and operational experience of the Galactica Network Security Team. These procedures were developed in direct response to the evolving threat landscape facing the Colonial Fleet, and they reflect our commitment to a simple but critical principle: security is not a feature — it is a discipline.</p>
+            <p>Every crew member who reads this manual takes on a share of the responsibility for protecting fleet systems. The strength of our network defenses is determined not only by the tools and protocols we deploy, but by the judgment, vigilance, and discipline of every person who operates within them.</p>
+            <p>The threats we face are real. The consequences of failure are severe. But with clear procedures, consistent practice, and collective commitment, the fleet's digital infrastructure can remain resilient against any attack.</p>
+            <p>Maintain your discipline. Follow your protocols. Protect the fleet.</p>
+            <div class="afterword-sig">
+              <div class="sig-line">— Galactica Network Security Team</div>
+              <div class="sig-line">Paul Davis</div>
+              <div class="sig-tag">GNS-FSD-001 // END OF DOCUMENT</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-footer">
+          <div class="footer-line">DOCUMENT: GNS-FSD-001 &nbsp;|&nbsp; CLASSIFICATION: RESTRICTED &nbsp;|&nbsp; ALL RIGHTS RESERVED — COLONIAL FLEET</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
