@@ -17,7 +17,7 @@ export default function Introduction({ num }) {
 
       <div className="terminal-block">
         <div className="terminal-titlebar">
-          <span className="t-dot-bar">// SYS</span>
+          <span className="t-dot-bar">{'// SYS'}</span>
           <span className="t-label">SCOPE_OF_MANUAL.log</span>
         </div>
         <div className="terminal-body">

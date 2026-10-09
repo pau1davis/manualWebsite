@@ -41,7 +41,7 @@ export default function IncidentReport({ num }) {
 
       <div className="terminal-block">
         <div className="terminal-titlebar">
-          <span className="t-dot-bar">// SYS</span>
+          <span className="t-dot-bar">{'// SYS'}</span>
           <span className="t-label">INCIDENT_REPORT.log</span>
         </div>
         <div className="terminal-body">
